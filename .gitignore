@@ -1,0 +1,59 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/music-service-app/node_modules
+/music-service-app/.pnp
+/music-service-app.pnp.js
+
+# testing
+/music-service-app/coverage
+
+# production
+/music-service-app/build
+
+# misc
+/music-service-app/.DS_Store
+/music-service-app/.env.local
+/music-service-app/.env.development.local
+/music-service-app/.env.test.local
+/music-service-app/.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+music-service-app/yarn-error.log
+
+# compiled output
+/music_service-api/server/dist
+/music_service-api/server/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
