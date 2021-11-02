@@ -1,6 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import user from "../../store/user";
 import {Alert} from "antd";
+import {observer} from "mobx-react-lite";
 
 interface OwnProps {
     showAlert: boolean
@@ -19,4 +20,4 @@ const AlertForm: FunctionComponent<Props> = ({showAlert}) => {
     );
 };
 
-export default AlertForm;
+export default observer(AlertForm);

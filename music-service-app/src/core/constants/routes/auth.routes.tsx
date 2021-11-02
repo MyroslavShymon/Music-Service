@@ -9,16 +9,6 @@ export const authRoutes: IRoutes[] = [
         path: RoutesConstants.TEST,
         type: PagesConstants.EMPTY
     },
-    // {
-    //     component: AuthPage,
-    //     path: RoutesConstants.LOGIN,
-    //     type: PagesConstants.EMPTY
-    // },
-    // {
-    //     component: AuthPage,
-    //     path: RoutesConstants.REGISTRATION,
-    //     type: PagesConstants.EMPTY
-    // },
     {
         component: <MainPage/>,
         path: RoutesConstants.MAIN,

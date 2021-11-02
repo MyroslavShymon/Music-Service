@@ -5,6 +5,7 @@ import EmptyLayout from "./components/layouts/EmptyLayout";
 import {authRoutes, publicRoutes, RoutesConstants} from "./core/constants/routes";
 import MainLayout from "./components/layouts/MainLayout";
 import user from "./store/user";
+import {observer} from "mobx-react-lite";
 
 interface OwnProps {
 }
@@ -37,4 +38,4 @@ const AppRouter: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default AppRouter;
+export default observer(AppRouter);

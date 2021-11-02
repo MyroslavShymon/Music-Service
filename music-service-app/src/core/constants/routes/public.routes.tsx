@@ -3,11 +3,17 @@ import {RoutesConstants} from "./routes.constants";
 import TestPage from "../../../pages/TestPage";
 import {PagesConstants} from "../pages.constants";
 import {AuthPage} from "../../../pages";
+import TestStartPage from "../../../pages/TestStartPage";
 
 export const publicRoutes: IRoutes[] = [
     {
         component: <TestPage/>,
         path: RoutesConstants.TEST,
+        type: PagesConstants.EMPTY
+    },
+    {
+        component: <TestStartPage/>,
+        path: RoutesConstants.TESTSTART,
         type: PagesConstants.EMPTY
     },
     {

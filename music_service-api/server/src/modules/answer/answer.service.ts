@@ -64,7 +64,7 @@ export class AnswerService {
 				.leftJoinAndSelect('answer.answerToTests', 'test')
 				.setParameters({ testId })
 				.where('test.testId = :testId')
-				.getOne();
+				.getMany();
 		}
 
 		if (!testId && nextTestId) {
@@ -73,7 +73,7 @@ export class AnswerService {
 				.leftJoinAndSelect('answer.answerToTests', 'test')
 				.setParameters({ nextTestId })
 				.where('test.nextTestId = :nextTestId')
-				.getOne();
+				.getMany();
 		}
 
 		const answer = await this.answerRepository
@@ -82,7 +82,7 @@ export class AnswerService {
 			.setParameters({ testId, nextTestId })
 			.where('test.testId = :testId')
 			.where('test.nextTestId = :nextTestId')
-			.getOne();
+			.getMany();
 
 		if (!answer) {
 			throw new NotFoundException(`Не знайдено такої відповіді`);
