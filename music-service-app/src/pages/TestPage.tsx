@@ -5,6 +5,7 @@ import {Button, Col, Divider, Form, Radio, Row} from "antd";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import user from "../store/user";
+import {RoutesConstants} from "../core/constants/routes";
 
 interface OwnProps {
 }
@@ -19,15 +20,17 @@ const TestPage: FunctionComponent<Props> = (props) => {
 
     //
     const nextTest = () => {
-        test.test.data?.answers.map(answer =>
-            answer.answerToTests.map(async ({answerId, nextTestId}) => {
-                if (answerId === checkedAnswer) {
-                    await test.fetchTest(nextTestId, answerId, user.user.id)
-                    console.log("user.user.id", user.user.id)
+        test.test.data?.answers.map(async (answer) => {
+            for (let i = 0; i < answer.answerToTests.length; i++) {
+                if (answer.answerToTests[i].answerId === checkedAnswer && answer.answerToTests[i].nextTestId !== null) {
+                    await test.fetchTest(Number(answer.answerToTests[i].nextTestId), answer.answerToTests[i].answerId, user.user.id)
                     history.push(`/test/${test.test.data?.test.id}`)
+                } else if (answer.answerToTests[i].nextTestId === null) {
+                    history.push(RoutesConstants.PREFERENCES)
+                    break;
                 }
-            })
-        )
+            }
+        })
     }
 
 

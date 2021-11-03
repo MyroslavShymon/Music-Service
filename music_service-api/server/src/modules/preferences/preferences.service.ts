@@ -75,4 +75,13 @@ export class PreferencesService {
 		preference.weight += weight;
 		return this.preferencesRepository.save(preference);
 	}
+
+	async getPreferencesByUserId(id: number) {
+		return this.preferencesRepository
+			.createQueryBuilder('preferences')
+			.leftJoin('preferences.user', 'user')
+			.leftJoinAndSelect('preferences.genre', 'genre')
+			.where('user.id = :id', { id })
+			.getMany();
+	}
 }

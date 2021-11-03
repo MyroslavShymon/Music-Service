@@ -36,14 +36,19 @@ export class AnswerService {
 		dto: CreateAnswerToTestDto,
 	): Promise<AnswerToTest> {
 		const test = await this.testService.findTestById(dto.testId);
-		const nextTest = await this.testService.findTestById(dto.nextTestId);
+		let nextTest;
+		try {
+			nextTest = await this.testService.findTestById(dto.nextTestId);
+		} catch (e) {
+			nextTest = null;
+		}
 		const answer = await this.findAnswerById(dto.answerId);
-
+		console.log('nextTest', nextTest);
 		// if (test && nextTest && answer) {
 		return this.answerToTestRepository.save({
 			answerId: answer.id,
 			testId: test.id,
-			nextTestId: nextTest.id,
+			nextTestId: nextTest?.id,
 		});
 		// }
 	}

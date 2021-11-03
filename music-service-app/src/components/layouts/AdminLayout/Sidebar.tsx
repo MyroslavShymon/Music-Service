@@ -1,11 +1,11 @@
 import React, {FunctionComponent, useState} from 'react';
-import Sider from "antd/es/layout/Sider";
 import {Menu} from "antd";
-import {menu} from "./menu.constant";
-import {NavLink, useHistory, useLocation} from 'react-router-dom';
-import {RoutesConstants} from "../../../core/constants/routes";
-import user from "../../../store/user";
+import {NavLink, useHistory, useLocation} from "react-router-dom";
 import {LogoutOutlined} from "@ant-design/icons";
+import Sider from "antd/es/layout/Sider";
+import {menu} from "./menu.constant";
+import user from "../../../store/user";
+import {RoutesConstants} from "../../../core/constants/routes";
 
 interface OwnProps {
 }
@@ -21,7 +21,6 @@ const Sidebar: FunctionComponent<Props> = (props) => {
         user.logout()
         history.push(RoutesConstants.LOGIN)
     }
-    console.log("location.pathname",location.pathname)
     return (
         <Sider className={"sidebar"} collapsible onCollapse={() => setCollapsed(!collapsed)}>
             <div className="logo"/>
@@ -33,7 +32,7 @@ const Sidebar: FunctionComponent<Props> = (props) => {
                         </NavLink>
                     </Menu.Item>
                 )}
-                <Menu.Item onClick={logout} icon={<LogoutOutlined />}>Logout</Menu.Item>
+                <Menu.Item onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
             </Menu>
         </Sider>
     );

@@ -14,6 +14,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateUserDto } from '../../core/dtos/create-user.dto';
 import { UserService } from './user.service';
 import { ChangeUserDto } from './dtos/change-user.dto';
+import { RoleDto } from './dtos/role.dto';
 
 @Controller('/user')
 export class UserController {
@@ -26,6 +27,11 @@ export class UserController {
 		@UploadedFile() image: Express.Multer.File,
 	) {
 		return this.userService.createUser(userDto, image);
+	}
+
+	@Post('/add-role/:id')
+	addRole(@Body() roleDto: RoleDto, @Param() params) {
+		return this.userService.addRoleToUser(params.id, roleDto.title);
 	}
 
 	@Get()

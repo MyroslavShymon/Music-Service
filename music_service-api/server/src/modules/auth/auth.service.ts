@@ -22,7 +22,7 @@ export class AuthService {
 	}
 
 	private async validateUser(dto: LoginUserDto): Promise<User> {
-		const user: User = await this.userService.findUserByEmail(dto.email);
+		const user: User = await this.userService.getUserWithRoleByEmail(dto.email);
 
 		if (!user) {
 			throw new UnauthorizedException({

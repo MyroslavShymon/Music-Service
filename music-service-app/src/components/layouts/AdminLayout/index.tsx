@@ -1,8 +1,8 @@
 import React, {FunctionComponent, ReactNode} from 'react';
-import "../environment/index.less";
 import {Layout} from "antd";
 import {Content} from "antd/es/layout/layout";
 import Sidebar from "./Sidebar";
+import "../environment/index.less";
 
 interface OwnProps {
     children: ReactNode
@@ -10,8 +10,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const MainLayout: FunctionComponent<Props> = ({children}) => {
-
+const AdminLayout: FunctionComponent<Props> = ({children}) => {
     return (
         <Layout>
             <Sidebar/>
@@ -26,4 +25,4 @@ const MainLayout: FunctionComponent<Props> = ({children}) => {
     );
 };
 
-export default MainLayout;
+export default AdminLayout;

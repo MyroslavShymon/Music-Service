@@ -12,7 +12,7 @@ export class AnswerToTest {
 	@Column()
 	public testId!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: true })
 	public nextTestId!: number;
 
 	@ManyToOne(() => Answer, (answer: Answer) => answer.answerToTests, {

@@ -5,6 +5,7 @@ import {ITest} from "./core/interfaces/response/Test.interface.response";
 import {IAnswer} from "./core/interfaces/response/Answer.interface.response";
 import {ITestData} from "./core/interfaces/test-data.interface";
 import {AxiosError} from "axios";
+import {IPreferences} from "./core/interfaces/response/Preferences.interface.response";
 
 class Test {
     public test: IResponse<ITestData> = {}
@@ -13,7 +14,7 @@ class Test {
         makeAutoObservable(this, {}, {deep: true});
     }
 
-    public async fetchTest(nextTestId = 1, answerId = 0, userId = 0) {
+    public async fetchTest(nextTestId = 1 , answerId = 0, userId = 0) {
         try {
             const {data: testResponse} = await $host.get<ITest>(`/test/${nextTestId}`)
             const {data: answerResponse} = await $host.get<IAnswer[]>('/answer', {params: {testId: testResponse.id}})

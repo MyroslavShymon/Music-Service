@@ -43,8 +43,43 @@ export class UserService {
 		});
 	}
 
+	async addRoleToUser(userId: number, roleTitle: string): Promise<any> {
+		const role = await this.roleService.getRoleByTitle(roleTitle);
+		const userWithRoles = await this.getUserWithRoleByUserId(userId);
+		if (!userWithRoles) {
+			throw new NotFoundException(`Нема користувача з id ${userId}`);
+		}
+		const { roles, ...user } = userWithRoles;
+
+		// console.log("another", another);
+		await this.userRepository.save({
+			...user,
+			roles: [...roles, role],
+		});
+		return {
+			status: HttpStatus.OK,
+			message: `Ви додали роль ${roleTitle} користувачу з id ${userId}`,
+		};
+	}
+
 	async getAllUsers(): Promise<User[]> {
 		return this.userRepository.find();
+	}
+
+	async getUserWithRoleByUserId(id: number) {
+		return this.userRepository
+			.createQueryBuilder('user')
+			.where({ id })
+			.leftJoinAndSelect('user.roles', 'roles')
+			.getOne();
+	}
+
+	async getUserWithRoleByEmail(email: string) {
+		return this.userRepository
+			.createQueryBuilder('user')
+			.where({ email })
+			.leftJoinAndSelect('user.roles', 'roles')
+			.getOne();
 	}
 
 	async findUserById(id: number): Promise<User> {

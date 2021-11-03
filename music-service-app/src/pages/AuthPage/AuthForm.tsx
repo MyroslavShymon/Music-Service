@@ -26,8 +26,11 @@ const AuthForm: FunctionComponent<Props> = ({setShowAlert}) => {
                 history.push(RoutesConstants.TESTSTART)
         } else {
             await user.login(values)
-            if (user.response.type === "success")
+            console.log("user.response.type", user.response.type, user)
+            if (user.response.type === "success") {
+                console.log("user.response.type", user.response.type, user)
                 history.push(RoutesConstants.MAIN)
+            }
         }
         setShowAlert(true)
     };

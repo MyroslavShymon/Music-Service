@@ -1,6 +1,6 @@
 import React from "react";
 import {BookOutlined, CustomerServiceOutlined, HomeOutlined, SearchOutlined} from "@ant-design/icons";
-import {IMenu} from "./menu.interface";
+import {IMenu} from "../environment/menu.interface";
 import {RoutesConstants} from "../../../core/constants/routes";
 
 export const menu: IMenu[] = [

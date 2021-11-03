@@ -7,4 +7,9 @@ export enum RoutesConstants {
     SEARCH = "/search",
     GENRE = "/genre",
     LIBRARY = "/library",
+    ADMIN = "/admin",
+    ADMINTEST = "/admin/test",
+    ADMINMAIN = "/admin/main",
+    ADMINGENRE = "/admin/genre",
+    PREFERENCES = "/preferences"
 }
