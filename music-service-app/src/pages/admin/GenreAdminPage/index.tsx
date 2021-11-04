@@ -1,4 +1,5 @@
 import React, {FunctionComponent} from 'react';
+import {observer} from "mobx-react-lite";
 
 interface OwnProps {
 }
@@ -10,4 +11,4 @@ const GenreAdminPage: FunctionComponent<Props> = (props) => {
     return (<div>GenreAdminPage</div>);
 };
 
-export default GenreAdminPage;
+export default observer(GenreAdminPage);

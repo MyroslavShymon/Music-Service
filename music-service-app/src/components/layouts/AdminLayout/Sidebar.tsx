@@ -1,11 +1,12 @@
 import React, {FunctionComponent, useState} from 'react';
 import {Menu} from "antd";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
-import {LogoutOutlined} from "@ant-design/icons";
+import {EnterOutlined, LogoutOutlined} from "@ant-design/icons";
 import Sider from "antd/es/layout/Sider";
 import {menu} from "./menu.constant";
 import user from "../../../store/user";
 import {RoutesConstants} from "../../../core/constants/routes";
+import {observer} from "mobx-react-lite";
 
 interface OwnProps {
 }
@@ -32,10 +33,15 @@ const Sidebar: FunctionComponent<Props> = (props) => {
                         </NavLink>
                     </Menu.Item>
                 )}
+                <Menu.Item
+                    onClick={() => history.push(RoutesConstants.MAIN)}
+                    icon={<EnterOutlined/>}>
+                    Main page
+                </Menu.Item>
                 <Menu.Item onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
             </Menu>
         </Sider>
     );
 };
 
-export default Sidebar;
+export default observer(Sidebar);

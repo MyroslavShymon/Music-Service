@@ -1,6 +1,6 @@
 import {IMenu} from "../environment/menu.interface";
 import {RoutesConstants} from "../../../core/constants/routes";
-import {CustomerServiceOutlined, HomeOutlined, OrderedListOutlined} from "@ant-design/icons";
+import {CheckOutlined, CustomerServiceOutlined, HomeOutlined, OrderedListOutlined} from "@ant-design/icons";
 
 export const menu: IMenu[] = [
     {
@@ -12,6 +12,11 @@ export const menu: IMenu[] = [
         title: "Test",
         icon: <OrderedListOutlined style={{fontSize: "150%"}}/>,
         link: RoutesConstants.ADMINTEST
+    },
+    {
+        title: "Answer",
+        icon: <CheckOutlined  style={{fontSize: "150%"}}/>,
+        link: RoutesConstants.ADMINANSWER
     },
     {
         title: "Genre",

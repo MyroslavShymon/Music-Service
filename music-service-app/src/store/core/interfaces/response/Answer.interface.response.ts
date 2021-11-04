@@ -8,5 +8,5 @@ export interface IAnswerToTest {
 export interface IAnswer {
     id: number,
     title: string,
-    answerToTests: IAnswerToTest[]
+    answerToTests?: IAnswerToTest[]
 }

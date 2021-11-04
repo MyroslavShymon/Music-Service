@@ -5,7 +5,8 @@ import {menu} from "./menu.constant";
 import {NavLink, useHistory, useLocation} from 'react-router-dom';
 import {RoutesConstants} from "../../../core/constants/routes";
 import user from "../../../store/user";
-import {LogoutOutlined} from "@ant-design/icons";
+import {EnterOutlined, LogoutOutlined} from "@ant-design/icons";
+import {observer} from "mobx-react-lite";
 
 interface OwnProps {
 }
@@ -21,7 +22,7 @@ const Sidebar: FunctionComponent<Props> = (props) => {
         user.logout()
         history.push(RoutesConstants.LOGIN)
     }
-    console.log("location.pathname",location.pathname)
+    console.log("location.pathname", location.pathname)
     return (
         <Sider className={"sidebar"} collapsible onCollapse={() => setCollapsed(!collapsed)}>
             <div className="logo"/>
@@ -33,10 +34,19 @@ const Sidebar: FunctionComponent<Props> = (props) => {
                         </NavLink>
                     </Menu.Item>
                 )}
-                <Menu.Item onClick={logout} icon={<LogoutOutlined />}>Logout</Menu.Item>
+                {
+                    user.isAdmin &&
+                    <Menu.Item
+                        onClick={() => history.push(RoutesConstants.ADMINMAIN)}
+                        icon={<EnterOutlined/>}>
+                        Admin page
+                    </Menu.Item>
+                }
+                <Menu.Item onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
+
             </Menu>
         </Sider>
     );
 };
 
-export default Sidebar;
+export default observer(Sidebar);

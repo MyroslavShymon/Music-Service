@@ -1,7 +1,7 @@
-import {GenreAdminPage, MainAdminPage, TestAdminPage} from "../../../pages/admin";
 import {IRoutes} from "../../interfaces/route.interface";
 import {PagesConstants} from "../pages.constants";
 import {RoutesConstants} from "./routes.constants";
+import {AnswerAdminPage, GenreAdminPage, MainAdminPage, TestAdminPage} from "../../../pages/admin";
 
 export const adminRoutes: IRoutes[] = [
     {
@@ -17,6 +17,11 @@ export const adminRoutes: IRoutes[] = [
     {
         component: <TestAdminPage/>,
         path: RoutesConstants.ADMINTEST,
+        type: PagesConstants.ADMIN
+    },
+    {
+        component: <AnswerAdminPage/>,
+        path: RoutesConstants.ADMINANSWER,
         type: PagesConstants.ADMIN
     },
 ]

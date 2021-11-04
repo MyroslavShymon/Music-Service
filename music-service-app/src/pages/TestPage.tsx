@@ -21,15 +21,16 @@ const TestPage: FunctionComponent<Props> = (props) => {
     //
     const nextTest = () => {
         test.test.data?.answers.map(async (answer) => {
-            for (let i = 0; i < answer.answerToTests.length; i++) {
-                if (answer.answerToTests[i].answerId === checkedAnswer && answer.answerToTests[i].nextTestId !== null) {
-                    await test.fetchTest(Number(answer.answerToTests[i].nextTestId), answer.answerToTests[i].answerId, user.user.id)
-                    history.push(`/test/${test.test.data?.test.id}`)
-                } else if (answer.answerToTests[i].nextTestId === null) {
-                    history.push(RoutesConstants.PREFERENCES)
-                    break;
+            if (answer?.answerToTests)
+                for (let i = 0; i < answer.answerToTests.length; i++) {
+                    if (answer.answerToTests[i].answerId === checkedAnswer && answer.answerToTests[i].nextTestId !== null) {
+                        await test.fetchTest(Number(answer.answerToTests[i].nextTestId), answer.answerToTests[i].answerId, user.user.id)
+                        history.push(`/test/${test.test.data?.test.id}`)
+                    } else if (answer.answerToTests[i].nextTestId === null) {
+                        history.push(RoutesConstants.PREFERENCES)
+                        break;
+                    }
                 }
-            }
         })
     }
 

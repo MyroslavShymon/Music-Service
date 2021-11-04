@@ -11,5 +11,6 @@ export enum RoutesConstants {
     ADMINTEST = "/admin/test",
     ADMINMAIN = "/admin/main",
     ADMINGENRE = "/admin/genre",
+    ADMINANSWER = "/admin/answer",
     PREFERENCES = "/preferences"
 }

@@ -96,7 +96,7 @@ class User {
         this.setToken("")
         this.setPreferences({})
         this.setUser({})
-
+        this.isAdmin = false
         localStorage.removeItem(LocalStorageConstants.ACCESS_TOKEN)
     }
 
