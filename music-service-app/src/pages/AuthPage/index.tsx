@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent} from 'react';
 import Title from "antd/es/typography/Title";
 import "./index.less"
 import AuthForm from "./AuthForm";

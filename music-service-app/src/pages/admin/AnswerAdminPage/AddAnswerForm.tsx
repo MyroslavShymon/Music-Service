@@ -1,6 +1,6 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import {Alert, Button, Col, Form, Input, Row} from "antd";
-import answerAdmin from "../../../store/admin/answer.admin";
+import answerAdmin from "./environment/store/answer.admin";
 import {TForm} from "../../../core/types/form.type";
 import {IAnswer} from "../../../store/core/interfaces/response/Answer.interface.response";
 import useTimeout from "../../../hooks/useTimeout";
@@ -18,38 +18,38 @@ const AddAnswerForm: FunctionComponent<Props> = () => {
     const onFinish = async (values: TForm<IAnswer>) => {
         await answerAdmin.addAnswer(values)
         form.resetFields()
-        setShowAlert(true)
     }
+    useEffect(() => {
+        setShowAlert(true)
+    }, [answerAdmin.answerResponse.message || answerAdmin.answerResponse.error, setShowAlert]);
 
     return (
         <Col span={24}>
             <Row>
                 <Form
+                    form={form}
                     name="basic"
-                    labelCol={{span: 8}}
                     layout="inline"
-                    wrapperCol={{span: 24}}
                     onFinish={onFinish}
-
                     // onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Title"
+                        label="Назва відповіді"
                         name="title"
                         rules={[{required: true, message: 'Please input your title!'}]}
                     >
                         <Input/>
                     </Form.Item>
 
-                    <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                    <Form.Item >
                         <Button type="primary" htmlType="submit">
                             Додати відповідь
                         </Button>
                     </Form.Item>
 
 
-                    <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                    <Form.Item >
                         <Button type="default" danger onClick={answerAdmin.deleteAll}>
                             Видалити всі
                         </Button>
@@ -58,7 +58,7 @@ const AddAnswerForm: FunctionComponent<Props> = () => {
             </Row>
             <Row style={{marginTop: 10}}>
                 {
-                    showAlert &&
+                    showAlert && answerAdmin.answerResponse.message &&
                     <Alert message={answerAdmin.answerResponse.message} type={answerAdmin.answerResponse.type}/>
                 }
             </Row>

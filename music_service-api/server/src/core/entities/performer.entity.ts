@@ -9,7 +9,7 @@ export class Performer {
 	@Column({ type: 'varchar', length: 100, unique: true, nullable: false })
 	public title: string;
 
-	@Column({ type: 'varchar', length: 150, nullable: false })
+	@Column({ type: 'varchar', length: 150, nullable: true })
 	public image: string;
 
 	@Column({ type: 'text', default: '' })

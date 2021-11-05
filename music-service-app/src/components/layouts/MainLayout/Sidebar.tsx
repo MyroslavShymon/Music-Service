@@ -42,7 +42,7 @@ const Sidebar: FunctionComponent<Props> = (props) => {
                         Admin page
                     </Menu.Item>
                 }
-                <Menu.Item onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
+                <Menu.Item onClick={logout} key={"logout"} icon={<LogoutOutlined/>}>Logout</Menu.Item>
 
             </Menu>
         </Sider>

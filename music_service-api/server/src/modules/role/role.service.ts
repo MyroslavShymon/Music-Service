@@ -8,7 +8,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from 'src/core/entities/role.entity';
 import { getConnection, Repository } from 'typeorm';
 import { CreateRoleDto } from './dtos/create-role.dto';
-// import * as Chance from 'chance';
 import { IDefaultSuccessResponse } from 'src/core/interfaces/default-response.interface';
 import { ChangeRoleDto } from './dtos/change-role.dto';
 
@@ -31,10 +30,6 @@ export class RoleService {
 		return this.roleRepository.save(dto);
 	}
 
-	//   random() {
-	//     const chance = new Chance();
-	//     return chance.weighted(['1', '2', '3', '40'], [1, 2, 3, 40]);
-	//   }
 
 	async getAllRoles(): Promise<Role[]> {
 		return this.roleRepository.find();

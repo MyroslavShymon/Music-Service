@@ -9,7 +9,7 @@ function useTimeout(ms: number): [boolean, TSetState<boolean>] {
             setBoolTimeout(false)
         }, ms);
         return () => clearTimeout(timer);
-    }, [boolTimeout]);
+    }, [boolTimeout, ms]);
 
     return [boolTimeout, setBoolTimeout];
 }

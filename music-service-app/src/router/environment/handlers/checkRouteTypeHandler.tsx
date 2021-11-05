@@ -10,16 +10,16 @@ export function checkRouteTypeHandler(type: PagesConstants, path: RoutesConstant
     switch (type) {
         case PagesConstants.ADMIN:
             return <Route key={path} path={path} exact
-            render={() => <AdminLayout>{component}</AdminLayout>}
+            render={() => <AdminLayout key={path}>{component}</AdminLayout>}
             />
         case PagesConstants.EMPTY:
             return <Route key={path} path={path} exact
-            render={() => <EmptyLayout>{component}</EmptyLayout>}/>
+            render={() => <EmptyLayout key={path}>{component}</EmptyLayout>}/>
         case PagesConstants.MAIN:
             return <Route key={path} path={path} exact
-            render={() => <MainLayout>{component}</MainLayout>}/>
+            render={() => <MainLayout key={path}>{component}</MainLayout>}/>
         default:
             return <Route key={path} path={path} exact
-            render={() => <EmptyLayout>{component}</EmptyLayout>}/>
+            render={() => <EmptyLayout key={path}>{component}</EmptyLayout>}/>
     }
 }

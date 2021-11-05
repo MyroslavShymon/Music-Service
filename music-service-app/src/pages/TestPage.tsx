@@ -27,6 +27,8 @@ const TestPage: FunctionComponent<Props> = (props) => {
                         await test.fetchTest(Number(answer.answerToTests[i].nextTestId), answer.answerToTests[i].answerId, user.user.id)
                         history.push(`/test/${test.test.data?.test.id}`)
                     } else if (answer.answerToTests[i].nextTestId === null) {
+                        if (user.user.id)
+                            await test.answerQuestion(answer.answerToTests[i].answerId, user.user.id)
                         history.push(RoutesConstants.PREFERENCES)
                         break;
                     }

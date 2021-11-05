@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import {Redirect, Switch} from "react-router-dom";
 import {adminRoutes, authRoutes, publicRoutes, RoutesConstants} from "../core/constants/routes";
 import user from "../store/user";
@@ -15,9 +15,10 @@ const AppRouter: FunctionComponent<Props> = (props) => {
         user.getToken()
     }, []);
 
-    const [isAuth, setIsAuth] = useState<boolean>(!!user.getToken());
-    console.log("user.isAdmin", user.isAdmin)
+    // const [isAuth, setIsAuth] = useState<boolean>(!!user.getToken());
+    // console.log("user.isAdmin", user.isAdmin)
     // let history = useHistory();
+    //TODO maybe bug
 
     return (
         <Switch>
@@ -27,7 +28,7 @@ const AppRouter: FunctionComponent<Props> = (props) => {
                 )
             }
             {
-                isAuth &&
+                user.getToken() &&
                 authRoutes.map(({path, component, type}) =>
                     checkRouteTypeHandler(type, path, component)
                 )
@@ -38,7 +39,7 @@ const AppRouter: FunctionComponent<Props> = (props) => {
                     checkRouteTypeHandler(type, path, component)
                 )
             }
-            {isAuth ? <Redirect to={RoutesConstants.MAIN}/> : <Redirect to={RoutesConstants.LOGIN}/>}
+            {user.getToken() ? <Redirect to={RoutesConstants.MAIN}/> : <Redirect to={RoutesConstants.LOGIN}/>}
         </Switch>
     );
 };

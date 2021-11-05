@@ -1,8 +1,8 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {Col, Row, Table} from "antd";
 import Title from "antd/es/typography/Title";
-import answerAdmin from '../../../store/admin/answer.admin';
+import answerAdmin from './environment/store/answer.admin';
 import {columns} from "./environment/constants/columns.constant";
 import AddAnswerForm from "./AddAnswerForm";
 
@@ -26,7 +26,11 @@ const AnswerAdminPage: FunctionComponent<Props> = (props) => {
             </Row>
             <AddAnswerForm/>
             <br/>
-            <Table dataSource={answerAdmin.answer || []} columns={columns}/>;
+            {
+                answerAdmin.answer ?
+                    <Table dataSource={answerAdmin.answer} rowKey={"id"} columns={columns}/>
+                    : "Немає відповідей"
+            }
         </>
     );
 };

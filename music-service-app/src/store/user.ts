@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {AxiosError} from "axios";
 import {LocalStorageConstants} from "../core/constants/localStorage.constants";
 import {IResponse} from "../core/interfaces/response";
@@ -9,12 +9,14 @@ import jwtDecode from "jwt-decode";
 import {IJwtDecodedUser} from "./core/interfaces/jwt-decoded-user.interface";
 import {IPreferences} from "./core/interfaces/response/Preferences.interface.response";
 import {IGenre} from "./core/interfaces/response/Genre.interface.response";
+import {IAlbum} from "./core/interfaces/response/Album.interface.response";
 
 class User {
     public user!: IUser;
     public token!: string;
     public response: IResponse<IUser> = {};
     public preferencesResponse: IResponse<IPreferences[]> = {}
+    public recommendationAlbumsResponse: IResponse<IAlbum[]> = {}
     public isAdmin: boolean = false;
 
     constructor() {
@@ -45,6 +47,19 @@ class User {
                 message: (e as AxiosError)?.response?.data?.error,
                 type: 'error'
             })
+        }
+    }
+
+    public async getRecommendation() {
+        try {
+            const {data: recommendationAlbums} = await $host.get<IAlbum[]>(`preferences/recommendation/${this.user.id}`)
+            this.recommendationAlbumsResponse = {data: recommendationAlbums, type: "success"}
+        } catch (e) {
+            this.recommendationAlbumsResponse = {
+                data: this.recommendationAlbumsResponse.data,
+                message: (e as AxiosError)?.response?.data?.error,
+                type: 'error'
+            }
         }
     }
 
@@ -103,6 +118,7 @@ class User {
 
     public async getGenresWithPreferences() {
         const {data: preferencesResponse} = await $host.get<IPreferences[]>(`preferences/${this.user.id}`)
+        console.log("preferencesResponse", preferencesResponse)
         this.setPreferences({data: preferencesResponse, message: "Preferences get successful", type: "success"})
     }
 
@@ -123,6 +139,10 @@ class User {
             }
         }
         return mostPreferGenres
+    }
+
+    get recommendation() {
+        return this.recommendationAlbumsResponse.data
     }
 
     setUser = (user: IUser) => {

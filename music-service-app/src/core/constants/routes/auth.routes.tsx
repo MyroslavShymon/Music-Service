@@ -1,7 +1,7 @@
 import {IRoutes} from "../../interfaces/route.interface";
 import {PagesConstants} from "../pages.constants";
 import {RoutesConstants} from "./routes.constants";
-import {AuthPage, GenrePage, LibraryPage, MainPage, SearchPage, TestPage} from "../../../pages";
+import {GenrePage, LibraryPage, MainPage, SearchPage, TestPage} from "../../../pages";
 
 export const authRoutes: IRoutes[] = [
     {

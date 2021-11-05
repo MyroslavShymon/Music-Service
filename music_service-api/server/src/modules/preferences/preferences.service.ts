@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Genre, Preferences, User } from '../../core/entities';
+import { AlbumToGenre, Genre, Preferences, User } from '../../core/entities';
 import { Repository } from 'typeorm';
 import { GenreService } from '../genre/genre.service';
 import { UserService } from '../user/user.service';
+import * as Chance from 'chance';
 
 @Injectable()
 export class PreferencesService {
@@ -14,6 +15,8 @@ export class PreferencesService {
 		private readonly userRepository: Repository<User>,
 		@InjectRepository(Genre)
 		private readonly genreRepository: Repository<Genre>,
+		@InjectRepository(AlbumToGenre)
+		private readonly albumToGenreRepository: Repository<AlbumToGenre>,
 	) {}
 
 	async addPreference(userId: number): Promise<void> {
@@ -83,5 +86,38 @@ export class PreferencesService {
 			.leftJoinAndSelect('preferences.genre', 'genre')
 			.where('user.id = :id', { id })
 			.getMany();
+	}
+
+	async getRecommendation(userId: number) {
+		const chance = new Chance();
+		const recommendation = [];
+		const preferencesWeights = [];
+		const preferencesGenresId = [];
+
+		const preferences = await this.preferencesRepository.find({
+			where: { userId },
+		});
+
+		preferences.forEach((prefer) => {
+			preferencesWeights.push(prefer.weight);
+			preferencesGenresId.push(prefer.genreId);
+		});
+		for (let i = 0; i < 6; i++) {
+			const recommendedGenreId = chance.weighted(
+				preferencesGenresId,
+				preferencesWeights,
+			);
+			const albumsSelectedByGenres = await this.albumToGenreRepository
+				.createQueryBuilder('albumToGenreRepository')
+				.leftJoinAndSelect('albumToGenreRepository.album', 'album')
+				.leftJoin('albumToGenreRepository.genre', 'genre')
+				.setParameters({ genreId: recommendedGenreId })
+				.where('genre.id = :genreId')
+				.getMany();
+			const albums = albumsSelectedByGenres.map((album) => album.album);
+			recommendation.push(chance.pickone(albums));
+		}
+
+		return recommendation;
 	}
 }

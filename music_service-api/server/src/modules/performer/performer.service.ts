@@ -35,7 +35,9 @@ export class PerformerService {
 			throw new BadRequestException('Виконавець з таким іменем вже існує');
 		}
 
-		const imagePath = this.fileService.createFile(FileType.IMAGE, image);
+		const imagePath = image
+			? this.fileService.createFile(FileType.IMAGE, image)
+			: null;
 
 		return this.performerRepository.save({
 			title: dto.title,

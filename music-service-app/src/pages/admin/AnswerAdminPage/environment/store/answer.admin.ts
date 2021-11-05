@@ -1,10 +1,10 @@
-import {makeAutoObservable, observable} from "mobx";
-import {IResponse} from "../../core/interfaces/response";
-import {IAnswer} from "../core/interfaces/response/Answer.interface.response";
-import {$host} from "../../http";
-import {IAnswerRequest} from "../core/interfaces/request/answer.interface.request";
+import {makeAutoObservable} from "mobx";
+import {IResponse} from "../../../../../core/interfaces/response";
+import {IAnswer} from "../../../../../store/core/interfaces/response/Answer.interface.response";
+import {$host} from "../../../../../http";
+import {IAnswerRequest} from "../../../../../store/core/interfaces/request/answer.interface.request";
 import {AxiosError} from "axios";
-import {IDefaultErrorResponse} from "../../core/interfaces/response/default-error.response.interface";
+import {IDefaultErrorResponse} from "../../../../../core/interfaces/response/default-error.response.interface";
 
 
 class AnswerAdmin {
@@ -17,7 +17,7 @@ class AnswerAdmin {
     public async fetchAllAnswers() {
         try {
             const {data: answerResponse} = await $host.get<IAnswer[]>("answer")
-            this.answerResponse = {data: answerResponse, type: "success", message: "Відповіді загружено успішно"}
+            this.answerResponse = {data: answerResponse, type: "success"}
         } catch (e) {
             this.answerResponse = {
                 data: this.answerResponse.data,
@@ -52,6 +52,7 @@ class AnswerAdmin {
                 type: "success",
                 message: answerResponse.message
             }
+            console.log("this.answerResponse", this.answerResponse)
         } catch (e) {
             this.answerResponse = {
                 data: this.answerResponse.data,

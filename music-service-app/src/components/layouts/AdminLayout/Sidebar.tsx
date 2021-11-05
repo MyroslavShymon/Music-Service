@@ -34,11 +34,12 @@ const Sidebar: FunctionComponent<Props> = (props) => {
                     </Menu.Item>
                 )}
                 <Menu.Item
+                    key={RoutesConstants.MAIN}
                     onClick={() => history.push(RoutesConstants.MAIN)}
                     icon={<EnterOutlined/>}>
                     Main page
                 </Menu.Item>
-                <Menu.Item onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
+                <Menu.Item key={"logout"} onClick={logout} icon={<LogoutOutlined/>}>Logout</Menu.Item>
             </Menu>
         </Sider>
     );

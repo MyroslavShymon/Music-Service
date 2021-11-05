@@ -1,5 +1,7 @@
 import React, {FunctionComponent} from 'react';
-import {observer} from "mobx-react-lite";
+import Title from "antd/es/typography/Title";
+import TestsConnect from "./TestsConnect";
+import AnswerGenreConnect from "./AnswerGenreConnect";
 
 interface OwnProps {
 }
@@ -8,7 +10,13 @@ type Props = OwnProps;
 
 const MainAdminPage: FunctionComponent<Props> = (props) => {
 
-    return (<div>MainAdminPage</div>);
+    return (
+        <>
+            <Title level={2}>Сторінка об'єднання тестів жанрів та відповідей</Title>
+            <TestsConnect/>
+            <AnswerGenreConnect/>
+        </>
+    );
 };
 
-export default observer(MainAdminPage);
+export default MainAdminPage;

@@ -21,7 +21,7 @@ export class Genre {
 	@Column({ unique: true, type: 'text' })
 	public description: string;
 
-	@Column({ type: 'varchar', length: 150, nullable: false })
+	@Column({ type: 'varchar', length: 150, nullable: true })
 	public image: string;
 
 	@OneToMany(() => AnswerToGenre, (answerToGenre) => answerToGenre.genre, {

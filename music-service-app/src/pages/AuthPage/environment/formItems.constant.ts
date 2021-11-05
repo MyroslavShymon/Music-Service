@@ -1,5 +1,4 @@
 import {IFormItem} from "./formItem.interface";
-import {RoutesConstants} from "../../../core/constants/routes";
 
 export const formItemsConstant: IFormItem[] = [
     {

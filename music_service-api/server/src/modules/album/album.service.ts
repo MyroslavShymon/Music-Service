@@ -49,7 +49,9 @@ export class AlbumService {
 			throw new NotFoundException('Такого виконавця не існує');
 		}
 
-		const imagePath = this.fileService.createFile(FileType.IMAGE, image);
+		const imagePath = image
+			? this.fileService.createFile(FileType.IMAGE, image)
+			: null;
 
 		return this.albumRepository.save({
 			title: dto.title,

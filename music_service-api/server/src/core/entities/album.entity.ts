@@ -23,7 +23,7 @@ export class Album {
 	@Column({ type: 'integer' })
 	public year: number;
 
-	@Column({ type: 'varchar', length: 150, nullable: false })
+	@Column({ type: 'varchar', length: 150, nullable: true })
 	public image: string;
 
 	@OneToMany(() => Song, (song) => song.album)

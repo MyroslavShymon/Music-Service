@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Button, Checkbox, Form, Input} from "antd";
+import {Checkbox, Form, Input} from "antd";
 import {formItemsConstant} from "./environment/formItems.constant";
 import user from "../../store/user";
 import {observer} from "mobx-react-lite";

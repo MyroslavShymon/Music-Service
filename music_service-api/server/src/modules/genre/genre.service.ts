@@ -42,7 +42,10 @@ export class GenreService {
 			throw new BadRequestException('Жанр вже існує');
 		}
 
-		const imagePath = this.fileService.createFile(FileType.IMAGE, image);
+		const imagePath = image
+			? this.fileService.createFile(FileType.IMAGE, image)
+			: null;
+
 		const genre = await this.genreRepository.save({
 			title: dto.title,
 			description: dto.description,
@@ -67,6 +70,7 @@ export class GenreService {
 			weight: dto.weight,
 		});
 	}
+
 	async answerTheQuestion(
 		dto: answerQuestionDto,
 	): Promise<IDefaultSuccessResponse> {

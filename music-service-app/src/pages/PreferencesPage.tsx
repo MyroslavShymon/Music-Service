@@ -1,7 +1,6 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import user from "../store/user";
 import {observer} from "mobx-react-lite";
-import {IPreferences} from "../store/core/interfaces/response/Preferences.interface.response";
 import {Pie} from "@ant-design/charts";
 import Title from "antd/es/typography/Title";
 import {Button, Col, Divider, Row, Typography} from 'antd';

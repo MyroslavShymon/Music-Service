@@ -9,4 +9,9 @@ export class PreferencesController {
 	getUserPreferences(@Param() params) {
 		return this.preferencesService.getPreferencesByUserId(params.id);
 	}
+
+	@Get('/recommendation/:id')
+	getUserRecommendation(@Param() params) {
+		return this.preferencesService.getRecommendation(params.id);
+	}
 }
